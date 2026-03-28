@@ -2,7 +2,9 @@ import "reflect-metadata"
 import express from "express"
 import "./database/dataSource.ts"
 import "./database"
+
 import { routes } from "./routes"
+const { swaggerUi, swaggerSpec } = require("./swagger");
 
 const cors = require("cors")
 
@@ -12,6 +14,8 @@ app.use(express.json())
 
 app.use(cors())
 
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(routes)
 
 app.listen(2999, () => console.log("Server is running"))
