@@ -1,5 +1,5 @@
 
-import { AppDataSource } from "../database/dataSource";
+import AppDataSource from "../database/dataSource";
 import { Evento } from "../entities/Evento";
 import { Pessoa } from "../entities/Pessoa";
 
@@ -7,7 +7,7 @@ type EventoRequest = {
     name: string
     participantes: string
     data: string
-    horario: string
+    horario: string // ISO 8601 com offset
 }
 
 export class CreateEventoService {
@@ -19,10 +19,10 @@ export class CreateEventoService {
             return new Error("Pessoa não existe!")
         }
         
-        const evento = repo.create({name, participantes, data, horario})
-       
-        await repo.save(evento)
-
-        return evento
+        // Converte horario para Date (aceita string ISO 8601 com offset)
+        const horarioDate = new Date(horario);
+        const evento = repo.create({name, participantes, data, horario: horarioDate});
+        await repo.save(evento);
+        return evento;
     }
 }

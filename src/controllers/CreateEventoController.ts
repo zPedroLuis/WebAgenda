@@ -3,6 +3,7 @@ import { CreateEventoService } from "../services/CreateEventoService";
 
 export class CreateEventoController {
     async handle(request: Request, response: Response) {
+        // horario deve ser string ISO 8601 com offset, ex: "2026-03-28T15:00:00-03:00"
         const { name, participantes, data, horario } = request.body
 
         const service = new CreateEventoService()

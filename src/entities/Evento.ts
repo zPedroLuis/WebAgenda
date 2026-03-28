@@ -21,8 +21,8 @@ export class Evento {
     @Column()
     data: Date
 
-    @Column()
-    horario: string
+    @Column({ type: 'timestamptz' })
+    horario: Date
 
     constructor() {
         if (!this.id){
