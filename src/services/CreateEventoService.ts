@@ -1,5 +1,5 @@
 
-import AppDataSource from "../database/dataSource";
+import { AppDataSource } from "../database/dataSource";
 import { Evento } from "../entities/Evento";
 import { Pessoa } from "../entities/Pessoa";
 

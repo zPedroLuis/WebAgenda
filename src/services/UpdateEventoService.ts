@@ -1,4 +1,4 @@
-import AppDataSource from "../database/dataSource";
+import { AppDataSource } from "../database/dataSource";
 import { Evento } from "../entities/Evento";
 
 type EventoUpdateRequest = {
