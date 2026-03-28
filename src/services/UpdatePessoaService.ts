@@ -1,4 +1,4 @@
-import { AppDataSource } from "../database/dataSource";
+import AppDataSource from "../database/dataSource";
 import { Pessoa } from "../entities/Pessoa";
 
 type PessoaUpdateRequest = {
