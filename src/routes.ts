@@ -1,16 +1,15 @@
 import { Router } from "express";
 import { CreatePessoaController } from './controllers/CreatePessoaController';
+import { DeletePessoaController } from "./controllers/DeletePessoaController";
+import { GetAllPessoaController } from './controllers/GetAllPessoaController';
+import { UpdatePessoaController } from './controllers/UpdatePessoaController';
+import { CreateEventoController } from './controllers/CreateEventoController';
 import { DeleteEventoController } from './controllers/DeleteEventoController';
 import { GetAllEventoController } from './controllers/GetAllEventoController';
-import { CreateEventoController } from './controllers/CreateEventoController';
 import { UpdateEventoController } from './controllers/UpdateEventoController';
-import { GetAllPessoaController } from './controllers/GetAllPessoaController';
-import { DeletePessoaController } from "./controllers/DeletePessoaController";
-import { UpdatePessoaController } from "./controllers/UpdatePessoaController";
 import { GetEventosByPessoaController } from "./controllers/GetEventosByPessoaController";
 
-const routes = Router()
-
+const routes = Router();
 
 /**
  * @swagger
@@ -40,14 +39,8 @@ const routes = Router()
  *       201:
  *         description: Pessoa criada com sucesso
  *   get:
- *     summary: Lista todas as pessoas ou pesquisa por nome
+ *     summary: Lista todas as pessoas
  *     tags: [Pessoa]
- *     parameters:
- *       - in: query
- *         name: nome
- *         schema:
- *           type: string
- *         description: Nome para filtrar
  *     responses:
  *       200:
  *         description: Lista de pessoas
@@ -57,28 +50,10 @@ const routes = Router()
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Pessoa'
- *
- * /pessoa/{id}/eventos:
- *   get:
- *     summary: Lista eventos de uma pessoa
- *     tags: [Pessoa]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: ID da pessoa
- *     responses:
- *       200:
- *         description: Lista de eventos
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Evento'
- *
+ */
+
+/**
+ * @swagger
  * /pessoa/{id}:
  *   put:
  *     summary: Atualiza uma pessoa
@@ -113,7 +88,33 @@ const routes = Router()
  *     responses:
  *       204:
  *         description: Pessoa removida
- *
+ */
+
+/**
+ * @swagger
+ * /pessoa/{id}/eventos:
+ *   get:
+ *     summary: Lista eventos de uma pessoa
+ *     tags: [Pessoa]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Lista de eventos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Evento'
+ */
+
+/**
+ * @swagger
  * /evento:
  *   post:
  *     summary: Cria um novo evento
@@ -156,7 +157,10 @@ const routes = Router()
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Evento'
- *
+ */
+
+/**
+ * @swagger
  * /evento/{id}:
  *   put:
  *     summary: Atualiza um evento
@@ -198,6 +202,7 @@ const routes = Router()
  *     responses:
  *       204:
  *         description: Evento removido
+ */
 
 /**
  * @swagger
@@ -226,16 +231,17 @@ const routes = Router()
  *           type: string
  */
 
+// Rotas Pessoa
+routes.post("/pessoa", new CreatePessoaController().handle);
+routes.get("/pessoa", new GetAllPessoaController().handle);
+routes.get("/pessoa/:id/eventos", new GetEventosByPessoaController().handle);
+routes.put("/pessoa/:id", new UpdatePessoaController().handle);
+routes.delete("/pessoa/:id", new DeletePessoaController().handle);
 
-routes.post("/pessoa", new CreatePessoaController().handle)
-routes.get("/pessoa", new GetAllPessoaController().handle)
-routes.get("/pessoa/:id/eventos", new GetEventosByPessoaController().handle)
-routes.put("/pessoa/:id", new UpdatePessoaController().handle)
-routes.delete("/pessoa/:id", new DeletePessoaController().handle)
+// Rotas Evento
+routes.post("/evento", new CreateEventoController().handle);
+routes.get("/evento", new GetAllEventoController().handle);
+routes.put("/evento/:id", new UpdateEventoController().handle);
+routes.delete("/evento/:id", new DeleteEventoController().handle);
 
-routes.post("/evento", new CreateEventoController().handle)
-routes.get("/evento", new GetAllEventoController().handle)
-routes.put("/evento/:id", new UpdateEventoController().handle)
-routes.delete("/evento/:id", new DeleteEventoController().handle)
-
-export { routes }
+export { routes };
