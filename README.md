@@ -1,40 +1,89 @@
-<h1 align="center"> WebAgenda </h1>
-<h3 align="center"> Site de calendário - API REST para gerenciar eventos e pessoas.</h3>
+
+<h1 align="center">WebAgenda</h1>
+<h3 align="center">Site de calendário - API REST para gerenciar eventos e pessoas</h3>
 <h4 align="center"> 
     :construction:  Projeto em construção  :construction: 
     <p>Acompanhe em qual fase está o desenvolvimento do projeto clicando<a href="https://github.com/zPedroLuis/WebAgenda/issues/1"> aqui.</a></p>          
 </h4>
 
-## :hammer: Ferramentas utilizadas
+## :hammer: Tecnologias Utilizadas
 
-- `Expressjs`
-- `TypeScript`: Node.js
-- `TypeORM`
-- `PostgreSQL`
-- `React`
+- **Backend:** Express.js, TypeScript, TypeORM, PostgreSQL
+- **Frontend:** React
+- **Documentação:** Swagger (OpenAPI)
+- **Testes:** Jest
 
-## :chart: Funcionalidades do projeto
+---
+
+## :chart_with_upwards_trend: Funcionalidades
 
 - `Funcionalidade 1`: CRUD de Pessoas
 - `Funcionalidade 1a`: CRUD de Eventos
 - `Funcionalidade 2`: Adição de pessoas à eventos
 - `Funcionalidade 2a`: Pesquisa de eventos por pessoas
 
-## :cd: Clonando e rodando
+---
 
-<h4>Backend</h4>
+## :cd: Como rodar o projeto
 
-```
+### 1. Clone o repositório
+
+```sh
 git clone https://github.com/zPedroLuis/WebAgenda.git
 cd WebAgenda
+```
+
+### 2. Instale as dependências
+
+```sh
 npm install
+cd client
+npm install
+cd ..
+```
+
+### 3. Execute em modo desenvolvimento (backend + frontend juntos)
+
+```sh
 npm run dev
 ```
+- Backend: http://localhost:2999
+- Frontend: http://localhost:3000
+- Swagger: http://localhost:2999/api-docs
 
-<h4>Frontend</h4>
-Abra outro terminal no VScode e:
+### 4. Rodar apenas o frontend
 
-```
+```sh
 cd client
 npm start
+```
+
+### 5. Rodar apenas o backend
+
+```sh
+npm run dev:server
+```
+
+---
+
+## :test_tube: Testes
+
+Para rodar os testes automatizados (Jest):
+
+```sh
+npm test
+```
+
+---
+
+## :file_folder: Estrutura de Pastas
+
+```
+WebAgenda/
+    ├── client/           # Frontend React
+    ├── src/              # Backend Node/TypeScript
+    ├── dev-runner.js     # Script para rodar backend e frontend juntos
+    ├── package.json
+    ├── README.md
+    └── ...
 ```
