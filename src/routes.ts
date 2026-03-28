@@ -7,6 +7,7 @@ import { UpdateEventoController } from './controllers/UpdateEventoController';
 import { GetAllPessoaController } from './controllers/GetAllPessoaController';
 import { DeletePessoaController } from "./controllers/DeletePessoaController";
 import { UpdatePessoaController } from "./controllers/UpdatePessoaController";
+import { GetEventosByPessoaController } from "./controllers/GetEventosByPessoaController";
 
 const routes = Router()
 
@@ -20,6 +21,7 @@ const routes = Router()
 
 routes.post("/pessoa", new CreatePessoaController().handle)
 routes.get("/pessoa", new GetAllPessoaController().handle)
+routes.get("/pessoa/:id/eventos", new GetEventosByPessoaController().handle)
 routes.put("/pessoa/:id", new UpdatePessoaController().handle)
 routes.delete("/pessoa/:id", new DeletePessoaController().handle)
 
