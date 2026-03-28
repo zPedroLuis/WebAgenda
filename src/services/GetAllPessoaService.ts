@@ -2,11 +2,14 @@ import { AppDataSource } from "../database/dataSource";
 import { Pessoa } from "../entities/Pessoa";
 
 export class GetAllPessoaService {
-    async execute () {
+    async execute (nome?: string) {
         const repo = AppDataSource.getRepository(Pessoa)
-
-        const pessoa = await repo.find()
-
-        return pessoa
+        let pessoa;
+        if (nome) {
+            pessoa = await repo.find({ where: { name: nome } });
+        } else {
+            pessoa = await repo.find();
+        }
+        return pessoa;
     }
 }
