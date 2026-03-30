@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function EventosList() {
+
+function formatarDataHora(dataISO, horarioISO) {
+  // Usa horarioISO se disponível, senão dataISO
+  const iso = horarioISO || dataISO;
+  if (!iso) return "";
+  const d = new Date(iso);
+  return d.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+}
+
+function EventosList({ atualizarTrigger }) {
   const [eventos, setEventos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState("");
@@ -21,7 +30,7 @@ function EventosList() {
 
   useEffect(() => {
     getEventos();
-  }, []);
+  }, [atualizarTrigger]);
 
   if (loading) return <div>Carregando eventos...</div>;
   if (erro) return <div style={{ color: "red" }}>{erro}</div>;
@@ -35,8 +44,8 @@ function EventosList() {
         eventos.map((evento) => (
           <div className="todo" key={evento.id}>
             <p>
-              <strong>{evento.name}</strong> — {evento.data} {evento.horario} <br />
-              Participante: {evento.participantes}
+              <strong>{evento.name}</strong> — {formatarDataHora(evento.data, evento.horario)} <br />
+              Participante: {evento.pessoa?.name || evento.participantes}
             </p>
           </div>
         ))

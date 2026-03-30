@@ -12,6 +12,7 @@ import EventosList from "./components/EventosList";
 
 function App() {
   const [pessoas, setPessoas] = useState([]);
+  const [atualizarEventos, setAtualizarEventos] = useState(0);
 
   async function getPessoas() {
     const response = await axios.get("http://localhost:2999/pessoa");
@@ -21,6 +22,10 @@ function App() {
   useEffect(() => {
     getPessoas();
   }, []);
+
+  function handleEventoInserido() {
+    setAtualizarEventos((v) => v + 1);
+  }
 
   return (
     <div className="App">
@@ -32,8 +37,8 @@ function App() {
         <PessoasList pessoas={pessoas} onEdit={getPessoas} />
         <hr style={{ margin: '32px 0' }} />
         <h1>Eventos</h1>
-        <EventoForm onSuccess={() => {}} pessoas={pessoas} />
-        <EventosList />
+        <EventoForm onSuccess={handleEventoInserido} pessoas={pessoas} />
+        <EventosList atualizarTrigger={atualizarEventos} />
       </header>
     </div>
   );
