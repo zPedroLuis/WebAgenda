@@ -1,9 +1,7 @@
 
 <h1 align="center">WebAgenda</h1>
 <h3 align="center">Site de calendário - API REST para gerenciar eventos e pessoas</h3>
-<h4 align="center"> 
-    :construction:  Projeto em construção  :construction: 
-    <p>Acompanhe em qual fase está o desenvolvimento do projeto clicando<a href="https://github.com/zPedroLuis/WebAgenda/issues/1"> aqui.</a></p>          
+<h4 align="center">       
 </h4>
 
 ## :hammer: Tecnologias Utilizadas
