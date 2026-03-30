@@ -16,9 +16,12 @@ function PessoasList({ pessoas, onEdit }) {
       await axios.delete(`http://localhost:2999/pessoa/${id}`);
       if (onEdit) onEdit();
     } catch (err) {
-      setErro(
-        err?.response?.data || "Erro ao excluir pessoa. Tente novamente."
-      );
+      const msg = err?.response?.data;
+      if (typeof msg === "string" && msg.includes("vinculada a eventos")) {
+        setErro("Não é possível excluir uma pessoa vinculada a eventos. Exclua os eventos primeiro.");
+      } else {
+        setErro(msg || "Erro ao excluir pessoa. Tente novamente.");
+      }
     } finally {
       setDeletingId(null);
     }
